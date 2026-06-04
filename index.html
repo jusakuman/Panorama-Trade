@@ -31,48 +31,7 @@
       </div>
     </div>
 
-        <!-- COTACOES SINGLE TICKER TRADINGVIEW -->
-        <div style="margin:12px 16px 0">
-          <div style="display:flex;align-items:center;margin-bottom:8px">
-            <div class="block-title">
-              <i class="ti ti-activity" style="font-size:13px"></i>
-              Cotacoes em Tempo Real
-            </div>
-            <div class="live-badge">
-              <div class="live-dot"></div>
-              Live . TradingView
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:60px">
-              <div class="tradingview-widget-container" style="height:60px">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                {"symbol":"OANDA:XAUUSD","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"br"}
-                </script>
-              </div>
-            </div>
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:60px">
-              <div class="tradingview-widget-container" style="height:60px">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                {"symbol":"CAPITALCOM:US100","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"br"}
-                </script>
-              </div>
-            </div>
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:60px">
-              <div class="tradingview-widget-container" style="height:60px">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                {"symbol":"CAPITALCOM:US30","width":"100%","colorTheme":"dark","isTransparent":true,"locale":"br"}
-                </script>
-              </div>
-            </div>
-          </div>
-        </div>
-    <!-- EVENTOS + RESTO RENDERIZADO PELO JS -->
-    <div id="home-dynamic"></div>
-
+          <div id="quotes-cards" style="display:flex;flex-direction:column;gap:6px"></div>
   </section>
 
   <section class="screen" id="s-calendar"></section>
