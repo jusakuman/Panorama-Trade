@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Panorama Trade — Seu briefing antes da abertura de Nova York">
+  <meta name="theme-color" content="#0A0D14">
+  <title>Panorama Trade</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ═══════════════════════════════════
+         TELA 1 — PANORAMA
+    ════════════════════════════════════ -->
+    <section class="screen active" id="s-home">
+      <!-- Conteúdo renderizado por js/pages/home.js -->
+    </section>
+
+    <!-- ═══════════════════════════════════
+         TELA 2 — CALENDÁRIO
+    ════════════════════════════════════ -->
+    <section class="screen" id="s-calendar">
+      <!-- Conteúdo renderizado por js/pages/calendar.js -->
+    </section>
+
+    <!-- ═══════════════════════════════════
+         TELA 3 — DIÁRIO
+    ════════════════════════════════════ -->
+    <section class="screen" id="s-diary">
+      <!-- Conteúdo renderizado por js/pages/diary.js -->
+    </section>
+
+    <!-- ═══════════════════════════════════
+         TELA 4 — CHECKLIST
+    ════════════════════════════════════ -->
+    <section class="screen" id="s-check">
+      <!-- Conteúdo renderizado por js/pages/checklist.js -->
+    </section>
+
+    <!-- ═══════════════════════════════════
+         TELA 5 — GRÁFICOS
+    ════════════════════════════════════ -->
+    <section class="screen" id="s-charts">
+      <!-- Conteúdo renderizado por js/pages/charts.js -->
+    </section>
+
+    <!-- ═══════════════════════════════════
+         NAVEGAÇÃO INFERIOR
+    ════════════════════════════════════ -->
+    <nav class="bottom-nav" id="bottom-nav">
+      <button class="nav-btn active" data-target="s-home">
+        <i class="ti ti-layout-dashboard"></i>
+        <span>Panorama</span>
+      </button>
+      <button class="nav-btn" data-target="s-calendar">
+        <i class="ti ti-calendar-event"></i>
+        <span>Calendário</span>
+      </button>
+      <button class="nav-btn" data-target="s-diary">
+        <i class="ti ti-notebook"></i>
+        <span>Diário</span>
+      </button>
+      <button class="nav-btn" data-target="s-check">
+        <i class="ti ti-checklist"></i>
+        <span>Checklist</span>
+      </button>
+      <button class="nav-btn" data-target="s-charts">
+        <i class="ti ti-chart-candle"></i>
+        <span>Gráficos</span>
+      </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════
+         MODAL — NOVO EVENTO ECONÔMICO
+    ════════════════════════════════════ -->
+    <div class="modal-overlay" id="modal-event" role="dialog" aria-modal="true" aria-label="Novo Evento Econômico">
+      <div class="modal">
+        <div class="modal-handle"></div>
+        <button class="modal-close" onclick="App.closeModal('modal-event')" aria-label="Fechar">
+          <i class="ti ti-x"></i>
+        </button>
+        <h2 class="modal-title">Novo Evento Econômico</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="ev-name">Nome do Evento</label>
+          <input class="form-input" id="ev-name" type="text" placeholder="Ex: NFP, ISM, FOMC..." maxlength="100" autocomplete="off">
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="ev-curr">Moeda</label>
+            <select class="form-select" id="ev-curr">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="JPY">JPY</option>
+              <option value="CAD">CAD</option>
+              <option value="AUD">AUD</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ev-impact">Impacto</label>
+            <select class="form-select" id="ev-impact">
+              <option value="high">🔴 Alto</option>
+              <option value="med">🟡 Médio</option>
+              <option value="low">⚪ Baixo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="ev-time">Horário (JST)</label>
+            <input class="form-input" id="ev-time" type="time">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ev-date">Data</label>
+            <input class="form-input" id="ev-date" type="date">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="ev-prev">Anterior</label>
+            <input class="form-input" id="ev-prev" type="text" placeholder="—" maxlength="20" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ev-fore">Previsão</label>
+            <input class="form-input" id="ev-fore" type="text" placeholder="—" maxlength="20" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ev-desc">Impacto esperado nos ativos</label>
+          <input class="form-input" id="ev-desc" type="text" placeholder="Ex: USD forte → XAU/USD desce" maxlength="200" autocomplete="off">
+        </div>
+
+        <button class="btn-primary" onclick="CalendarPage.saveEvent()">Salvar Evento</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         MODAL — NOVA OPERAÇÃO
+    ════════════════════════════════════ -->
+    <div class="modal-overlay" id="modal-trade" role="dialog" aria-modal="true" aria-label="Nova Operação">
+      <div class="modal">
+        <div class="modal-handle"></div>
+        <button class="modal-close" onclick="App.closeModal('modal-trade')" aria-label="Fechar">
+          <i class="ti ti-x"></i>
+        </button>
+        <h2 class="modal-title" id="trade-modal-title">Nova Operação</h2>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="tr-type">Tipo</label>
+            <select class="form-select" id="tr-type">
+              <option value="buy">🟢 Compra</option>
+              <option value="sell">🔴 Venda</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tr-time">Horário (JST)</label>
+            <input class="form-input" id="tr-time" type="time">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="tr-entry">Entrada</label>
+            <input class="form-input" id="tr-entry" type="number" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tr-lot">Lote</label>
+            <input class="form-input" id="tr-lot" type="number" placeholder="0.01" step="0.01" min="0">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="tr-sl">Stop Loss</label>
+            <input class="form-input" id="tr-sl" type="number" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tr-tp">Take Profit</label>
+            <input class="form-input" id="tr-tp" type="number" placeholder="0.00" step="0.01" min="0">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="tr-result">Resultado ($)</label>
+            <input class="form-input" id="tr-result" type="number" placeholder="0.00" step="0.01">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tr-pips">Pts / Pips</label>
+            <input class="form-input" id="tr-pips" type="number" placeholder="0" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tr-strat">Estratégia</label>
+          <select class="form-select" id="tr-strat">
+            <option value="Breakout">Breakout</option>
+            <option value="Reversão">Reversão</option>
+            <option value="Tendência">Tendência</option>
+            <option value="Notícia">Notícia</option>
+            <option value="Suporte/Resistência">Suporte / Resistência</option>
+            <option value="Outra">Outra</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tr-emo">Estado emocional</label>
+          <select class="form-select" id="tr-emo">
+            <option value="Calmo">😌 Calmo</option>
+            <option value="Focado">🎯 Focado</option>
+            <option value="Ansioso">😤 Ansioso</option>
+            <option value="Com medo">😨 Com medo</option>
+            <option value="Ganancioso">🤑 Ganancioso</option>
+            <option value="Frustrado">😠 Frustrado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tr-note">Análise / Observações</label>
+          <textarea class="form-textarea" id="tr-note" placeholder="Descreva sua análise antes da entrada..." maxlength="1000"></textarea>
+        </div>
+
+        <button class="btn-primary" onclick="DiaryPage.saveTrade()">Salvar Operação</button>
+      </div>
+    </div>
+
+  </div><!-- /#app -->
+
+  <!-- ═══════════════════════════════════
+       SCRIPTS — ordem importa!
+  ════════════════════════════════════ -->
+  <script src="js/storage.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/diary.js"></script>
+  <script src="js/checklist.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/calendar.js"></script>
+  <script src="js/pages/diary.js"></script>
+  <script src="js/pages/checklist.js"></script>
+  <script src="js/pages/charts.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
