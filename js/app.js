@@ -13,7 +13,7 @@ const App = (() => {
     _state = Storage.get();
     _setupNav();
     _setupClock();
-    HomePage.render(_state);
+    HomePage.render(_state); Quotes.start();
   }
 
   /* ─── Configura navegação inferior ─── */
@@ -39,7 +39,7 @@ const App = (() => {
     _state = Storage.get();
 
     switch (screenId) {
-      case 's-home':     HomePage.render(_state);      break;
+      case 's-home':     HomePage.render(_state); Quotes.start();      break;
       case 's-calendar': CalendarPage.render(_state);  break;
       case 's-diary':    DiaryPage.render(_state);      break;
       case 's-check':    ChecklistPage.render(_state);  break;
@@ -116,3 +116,4 @@ const App = (() => {
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 });
+
