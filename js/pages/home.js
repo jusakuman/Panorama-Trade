@@ -22,30 +22,36 @@
           </div>
           <div class="live-badge">
             <div class="live-dot"></div>
-            Live
+            Live · TradingView
           </div>
         </div>
-
-        <div style="display:flex;flex-direction:column;gap:8px">
-
-          <iframe
-            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22OANDA%3AXAUUSD%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
-            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
-            frameborder="0" scrolling="no" allowtransparency="true">
-          </iframe>
-
-          <iframe
-            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22CAPITALCOM%3AUS100%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
-            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
-            frameborder="0" scrolling="no" allowtransparency="true">
-          </iframe>
-
-          <iframe
-            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22CAPITALCOM%3AUS30%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
-            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
-            frameborder="0" scrolling="no" allowtransparency="true">
-          </iframe>
-
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;pointer-events:none">
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+            {
+              "title": "",
+              "locale": "br",
+              "colorTheme": "dark",
+              "isTransparent": true,
+              "showSymbolLogo": true,
+              "width": "100%",
+              "height": "auto",
+              "gridLineColor": "rgba(42,48,80,0.5)",
+              "symbolActiveColor": "rgba(28,34,53,1)",
+              "tabs": [
+                {
+                  "title": "Meus Ativos",
+                  "symbols": [
+                    { "s": "OANDA:XAUUSD",    "d": "XAU/USD" },
+                    { "s": "CAPITALCOM:US100", "d": "NASDAQ NAS100" },
+                    { "s": "CAPITALCOM:US30",  "d": "Dow Jones US30" }
+                  ]
+                }
+              ]
+            }
+            </script>
+          </div>
         </div>
       </div>
 
@@ -59,7 +65,7 @@
         </div>
         <div style="text-align:right">
           <div style="font-size:10px;color:var(--text3);margin-bottom:1px">Faltam</div>
-          <div style="font-size:14px;font-weight:600;font-family:'DM Mono',monospace;color:var(--orange)" id="countdown">--h --m --s</div>
+          <div style="font-size:14px;font-weight:600;font-family:DM Mono,monospace;color:var(--orange)" id="countdown">--h --m --s</div>
         </div>
       </div>
 
