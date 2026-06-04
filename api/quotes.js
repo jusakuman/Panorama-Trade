@@ -4,57 +4,36 @@
 
   try {
     const [xauRes, nasRes, us30Res] = await Promise.all([
-      fetch('https://api.gold-api.com/price/XAU'),
+      fetch('https://stooq.com/q/l/?s=xauusd&f=sd2t2ohlcv&h&e=csv'),
       fetch('https://stooq.com/q/l/?s=^ndx&f=sd2t2ohlcv&h&e=csv'),
       fetch('https://stooq.com/q/l/?s=^dji&f=sd2t2ohlcv&h&e=csv')
     ]);
 
-    const xauData = await xauRes.json();
-    const nasCsv = await nasRes.text();
+    const xauCsv  = await xauRes.text();
+    const nasCsv  = await nasRes.text();
     const us30Csv = await us30Res.text();
 
     function parseCsv(csv) {
       const lines = csv.trim().split('\n');
       const headers = lines[0].split(',');
-      const values = lines[1].split(',');
+      const values  = lines[1].split(',');
       const obj = {};
       headers.forEach((h, i) => { obj[h.trim()] = values[i] ? values[i].trim() : null; });
       return obj;
     }
 
-    const nas = parseCsv(nasCsv);
-    const us30 = parseCsv(us30Csv);
-
-    const nasClose = parseFloat(nas.Close);
-    const nasOpen = parseFloat(nas.Open);
-    const us30Close = parseFloat(us30.Close);
-    const us30Open = parseFloat(us30.Open);
+    function calc(row, id, name, sub) {
+      const close  = parseFloat(row.Close);
+      const open   = parseFloat(row.Open);
+      const change = close - open;
+      const pct    = (change / open) * 100;
+      return { id, name, sub, price: close, change, pct };
+    }
 
     const results = [
-      {
-        id: 'xau',
-        name: 'XAU/USD',
-        sub: 'Ouro',
-        price: xauData.price,
-        change: xauData.ch,
-        pct: xauData.chp
-      },
-      {
-        id: 'nas',
-        name: 'NAS100',
-        sub: 'NASDAQ 100',
-        price: nasClose,
-        change: nasClose - nasOpen,
-        pct: ((nasClose - nasOpen) / nasOpen) * 100
-      },
-      {
-        id: 'us30',
-        name: 'US30',
-        sub: 'Dow Jones',
-        price: us30Close,
-        change: us30Close - us30Open,
-        pct: ((us30Close - us30Open) / us30Open) * 100
-      }
+      calc(parseCsv(xauCsv),   'xau',  'XAU/USD', 'Ouro'),
+      calc(parseCsv(nasCsv),   'nas',  'NAS100',  'NASDAQ 100'),
+      calc(parseCsv(us30Csv),  'us30', 'US30',    'Dow Jones')
     ];
 
     res.setHeader('Cache-Control', 's-maxage=25, stale-while-revalidate');
