@@ -1,10 +1,4 @@
-﻿/* ═══════════════════════════════════════════════════
-   PANORAMA TRADE — js/pages/home.js
-   Tela Panorama do Dia.
-   Leitura obrigatória: CLAUDE.md antes de editar.
-════════════════════════════════════════════════════ */
-
-const HomePage = (() => {
+﻿const HomePage = (() => {
 
   function render(state) {
     const screen = document.getElementById('s-home');
@@ -16,65 +10,46 @@ const HomePage = (() => {
         </div>
         <div class="header-time">
           <div class="time" id="clock">--:--:--</div>
-          <div class="label">Japão (JST)</div>
+          <div class="label">Japao (JST)</div>
         </div>
       </div>
 
-      <!-- COTAÇÕES EM TEMPO REAL -->
-      <div style="margin:12px 16px 12px">
+      <div style="margin:12px 16px 0">
         <div style="display:flex;align-items:center;margin-bottom:8px">
           <div class="block-title">
             <i class="ti ti-activity" style="font-size:13px"></i>
-            Cotações em Tempo Real
+            Cotacoes em Tempo Real
           </div>
           <div class="live-badge">
             <div class="live-dot"></div>
-            Live · TradingView
+            Live
           </div>
         </div>
 
-        <!-- Widget Market Quotes — XAU/USD, NAS100, US30 -->
-        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden">
-          <div class="tradingview-widget-container">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-            {
-              "title": "",
-              "locale": "br",
-              "colorTheme": "dark",
-              "isTransparent": true,
-              "showSymbolLogo": true,
-              "showFloatingTooltip": false,
-              "width": "100%",
-              "height": "auto",
-              "gridLineColor": "rgba(42,48,80,0.5)",
-              "symbolActiveColor": "rgba(28,34,53,1)",
-              "tabs": [
-                {
-                  "title": "Meus Ativos",
-                  "symbols": [
-                    { "s": "OANDA:XAUUSD",      "d": "XAU/USD — Ouro"       },
-                    { "s": "CAPITALCOM:US100",   "d": "NASDAQ — NAS100"      },
-                    { "s": "CAPITALCOM:US30",    "d": "Dow Jones — US30"     }
-                  ]
-                },
-                {
-                  "title": "Referências",
-                  "symbols": [
-                    { "s": "TVC:DXY",    "d": "DXY — Dólar Index" },
-                    { "s": "TVC:US10Y",  "d": "US10Y — Juros"     },
-                    { "s": "NYMEX:CL1!", "d": "WTI — Petróleo"    }
-                  ]
-                }
-              ]
-            }
-            </script>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+
+          <iframe
+            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22OANDA%3AXAUUSD%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
+            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
+            frameborder="0" scrolling="no" allowtransparency="true">
+          </iframe>
+
+          <iframe
+            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22CAPITALCOM%3AUS100%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
+            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
+            frameborder="0" scrolling="no" allowtransparency="true">
+          </iframe>
+
+          <iframe
+            src="https://s.tradingview.com/embed-widget/single-quote/?locale=br#%7B%22symbol%22%3A%22CAPITALCOM%3AUS30%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22dark%22%2C%22isTransparent%22%3Atrue%7D"
+            style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)"
+            frameborder="0" scrolling="no" allowtransparency="true">
+          </iframe>
+
         </div>
       </div>
 
-      <!-- ABERTURA NY — compacto, apenas countdown -->
-      <div style="margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+      <div style="margin:10px 16px 0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
         <div style="display:flex;align-items:center;gap:8px">
           <i class="ti ti-clock" style="color:var(--gold2);font-size:16px"></i>
           <div>
@@ -88,8 +63,7 @@ const HomePage = (() => {
         </div>
       </div>
 
-      <!-- EVENTOS DE HOJE -->
-      <div style="margin:0 16px 12px">
+      <div style="margin:12px 16px 0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <div class="block-title">
             <i class="ti ti-calendar-event" style="font-size:12px"></i>
@@ -108,7 +82,7 @@ const HomePage = (() => {
       <div class="sec-label">Resumo do Dia</div>
       <div class="summary-card">
         <div class="summary-text" id="home-summary">
-          Acompanhe os eventos acima antes de operar. Evite entrar em posição nos 15 minutos antes e após cada evento de alto impacto.
+          Acompanhe os eventos acima antes de operar. Evite entrar em posicao nos 15 minutos antes e apos cada evento de alto impacto.
         </div>
         <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap" id="home-tags"></div>
       </div>
@@ -118,24 +92,24 @@ const HomePage = (() => {
         <div class="asset-alert-card">
           <div class="asset-icon gold-i">Au</div>
           <div class="ac-body">
-            <div class="ac-name">XAU/USD — Ouro</div>
-            <div class="ac-alert">Acompanhe o DXY. Alta do dólar pressiona ouro para baixo.</div>
+            <div class="ac-name">XAU/USD - Ouro</div>
+            <div class="ac-alert">Acompanhe o DXY. Alta do dolar pressiona ouro para baixo.</div>
           </div>
-          <div class="badge bm">Médio</div>
+          <div class="badge bm">Medio</div>
         </div>
         <div class="asset-alert-card">
           <div class="asset-icon nas-i">NQ</div>
           <div class="ac-body">
-            <div class="ac-name">NASDAQ — NAS100</div>
+            <div class="ac-name">NASDAQ - NAS100</div>
             <div class="ac-alert">Tecnologia em foco. Volatilidade esperada na abertura.</div>
           </div>
-          <div class="badge bm">Médio</div>
+          <div class="badge bm">Medio</div>
         </div>
         <div class="asset-alert-card">
           <div class="asset-icon dow-i">DJ</div>
           <div class="ac-body">
-            <div class="ac-name">Dow Jones — US30</div>
-            <div class="ac-alert">Blue chips estáveis. Sem catalisadores específicos.</div>
+            <div class="ac-name">Dow Jones - US30</div>
+            <div class="ac-alert">Blue chips estaveis. Sem catalisadores especificos.</div>
           </div>
           <div class="badge bl">Baixo</div>
         </div>
@@ -166,7 +140,7 @@ const HomePage = (() => {
     if (!listEl) return;
 
     if (!evs.length) {
-      listEl.innerHTML = '<div class="empty">Nenhum evento cadastrado para hoje.<br>Vá em Calendário e adicione.</div>';
+      listEl.innerHTML = '<div class="empty">Nenhum evento cadastrado para hoje.<br>Va em Calendario e adicione.</div>';
       if (banEl) banEl.style.display = 'none';
       return;
     }
@@ -176,7 +150,7 @@ const HomePage = (() => {
     const nextHigh = Events.getNextHigh(state);
     if (nextHigh && banEl && banText) {
       banEl.style.display = 'flex';
-      banText.innerHTML = 'Próximo alto impacto: <strong>' + nextHigh.name + '</strong> às <strong>' + nextHigh.time + ' JST</strong>';
+      banText.innerHTML = 'Proximo alto impacto: <strong>' + nextHigh.name + '</strong> as <strong>' + nextHigh.time + ' JST</strong>';
     } else if (banEl) {
       banEl.style.display = 'none';
     }
@@ -190,7 +164,7 @@ const HomePage = (() => {
 
     if (summaryEl && highCount > 0) {
       const names = evs.filter(e => e.impact === 'high').map(e => e.name).join(', ');
-      summaryEl.textContent = 'Atenção: ' + names + '. Eventos de alto impacto geram volatilidade intensa. Evite entrar nos 15 min antes e após. Reduza o lote se necessário.';
+      summaryEl.textContent = 'Atencao: ' + names + '. Eventos de alto impacto geram volatilidade intensa. Evite entrar nos 15 min antes e apos. Reduza o lote se necessario.';
     }
   }
 
