@@ -20,20 +20,9 @@ const HomePage = (() => {
         </div>
       </div>
 
-      <div class="opening-card">
-        <div>
-          <div class="oc-label">Abertura de Nova York</div>
-          <div class="oc-time" id="open-time">--:--</div>
-          <div class="oc-dst" id="open-dst">Calculando...</div>
-        </div>
-        <div class="oc-right">
-          <div class="oc-clabel">Faltam</div>
-          <div class="oc-countdown" id="countdown">--h --m --s</div>
-        </div>
-      </div>
-
-      <div style="margin:0 16px 12px">
-        <div class="block-header">
+      <!-- COTAÇÕES EM TEMPO REAL -->
+      <div style="margin:12px 16px 12px">
+        <div style="display:flex;align-items:center;margin-bottom:8px">
           <div class="block-title">
             <i class="ti ti-activity" style="font-size:13px"></i>
             Cotações em Tempo Real
@@ -43,6 +32,8 @@ const HomePage = (() => {
             Live · TradingView
           </div>
         </div>
+
+        <!-- Widget Market Quotes — XAU/USD, NAS100, US30 -->
         <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden">
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
@@ -52,26 +43,27 @@ const HomePage = (() => {
               "locale": "br",
               "colorTheme": "dark",
               "isTransparent": true,
-              "showSymbolLogo": false,
+              "showSymbolLogo": true,
+              "showFloatingTooltip": false,
               "width": "100%",
               "height": "auto",
-              "gridLineColor": "rgba(42,48,80,1)",
+              "gridLineColor": "rgba(42,48,80,0.5)",
               "symbolActiveColor": "rgba(28,34,53,1)",
               "tabs": [
                 {
                   "title": "Meus Ativos",
                   "symbols": [
-                    { "s": "OANDA:XAUUSD", "d": "XAU/USD — Ouro" },
-                    { "s": "NASDAQ:NDX",   "d": "NASDAQ — NAS100" },
-                    { "s": "DJ:DJI",       "d": "Dow Jones — US30" }
+                    { "s": "OANDA:XAUUSD",      "d": "XAU/USD — Ouro"       },
+                    { "s": "CAPITALCOM:US100",   "d": "NASDAQ — NAS100"      },
+                    { "s": "CAPITALCOM:US30",    "d": "Dow Jones — US30"     }
                   ]
                 },
                 {
                   "title": "Referências",
                   "symbols": [
                     { "s": "TVC:DXY",    "d": "DXY — Dólar Index" },
-                    { "s": "TVC:US10Y",  "d": "US10Y — Juros" },
-                    { "s": "NYMEX:CL1!", "d": "WTI — Petróleo" }
+                    { "s": "TVC:US10Y",  "d": "US10Y — Juros"     },
+                    { "s": "NYMEX:CL1!", "d": "WTI — Petróleo"    }
                   ]
                 }
               ]
@@ -81,8 +73,24 @@ const HomePage = (() => {
         </div>
       </div>
 
+      <!-- ABERTURA NY — compacto, apenas countdown -->
+      <div style="margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <i class="ti ti-clock" style="color:var(--gold2);font-size:16px"></i>
+          <div>
+            <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px">Abertura Nova York</div>
+            <div style="font-size:13px;font-weight:600;color:var(--gold2)" id="open-time">--:--</div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:10px;color:var(--text3);margin-bottom:1px">Faltam</div>
+          <div style="font-size:14px;font-weight:600;font-family:'DM Mono',monospace;color:var(--orange)" id="countdown">--h --m --s</div>
+        </div>
+      </div>
+
+      <!-- EVENTOS DE HOJE -->
       <div style="margin:0 16px 12px">
-        <div class="block-header" style="margin-bottom:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <div class="block-title">
             <i class="ti ti-calendar-event" style="font-size:12px"></i>
             Eventos de Hoje
@@ -140,13 +148,13 @@ const HomePage = (() => {
   }
 
   function _renderEvents(state) {
-    const evs      = Events.getToday(state);
-    const listEl   = document.getElementById('home-events');
-    const banEl    = document.getElementById('next-ban');
-    const banText  = document.getElementById('next-ban-text');
-    const summaryEl= document.getElementById('home-summary');
-    const tagsEl   = document.getElementById('home-tags');
-    const dateEl   = document.getElementById('ev-date-label');
+    const evs       = Events.getToday(state);
+    const listEl    = document.getElementById('home-events');
+    const banEl     = document.getElementById('next-ban');
+    const banText   = document.getElementById('next-ban-text');
+    const summaryEl = document.getElementById('home-summary');
+    const tagsEl    = document.getElementById('home-tags');
+    const dateEl    = document.getElementById('ev-date-label');
 
     if (dateEl) {
       dateEl.textContent = new Intl.DateTimeFormat('pt-BR', {
@@ -176,7 +184,7 @@ const HomePage = (() => {
     const highCount = evs.filter(e => e.impact === 'high').length;
     if (tagsEl) {
       tagsEl.innerHTML = highCount
-        ? `<span style="background:rgba(232,69,69,.1);color:var(--red);font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500">${highCount} evento${highCount > 1 ? 's' : ''} de alto impacto</span>`
+        ? '<span style="background:rgba(232,69,69,.1);color:var(--red);font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500">' + highCount + ' evento' + (highCount > 1 ? 's' : '') + ' de alto impacto</span>'
         : '';
     }
 
