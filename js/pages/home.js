@@ -55,20 +55,6 @@
         </div>
       </div>
 
-      <div style="margin:10px 16px 0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
-        <div style="display:flex;align-items:center;gap:8px">
-          <i class="ti ti-clock" style="color:var(--gold2);font-size:16px"></i>
-          <div>
-            <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px">Abertura Nova York</div>
-            <div style="font-size:13px;font-weight:600;color:var(--gold2)" id="open-time">--:--</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:10px;color:var(--text3);margin-bottom:1px">Faltam</div>
-          <div style="font-size:14px;font-weight:600;font-family:DM Mono,monospace;color:var(--orange)" id="countdown">--h --m --s</div>
-        </div>
-      </div>
-
       <div style="margin:12px 16px 0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <div class="block-title">
