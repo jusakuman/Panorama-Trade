@@ -1,60 +1,10 @@
 ﻿const HomePage = (() => {
 
   function render(state) {
-    const screen = document.getElementById('s-home');
-    screen.innerHTML = `
-      <div class="header">
-        <div>
-          <div class="header-logo">Panorama <span>Trade</span></div>
-          <div class="header-sub">Briefing antes de Nova York</div>
-        </div>
-        <div class="header-time">
-          <div class="time" id="clock">--:--:--</div>
-          <div class="label">Japao (JST)</div>
-        </div>
-      </div>
+    const dynamic = document.getElementById('home-dynamic');
+    if (!dynamic) return;
 
-      <div style="margin:12px 16px 0">
-        <div style="display:flex;align-items:center;margin-bottom:8px">
-          <div class="block-title">
-            <i class="ti ti-activity" style="font-size:13px"></i>
-            Cotacoes em Tempo Real
-          </div>
-          <div class="live-badge">
-            <div class="live-dot"></div>
-            Live · TradingView
-          </div>
-        </div>
-        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;pointer-events:none">
-          <div class="tradingview-widget-container">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-            {
-              "title": "",
-              "locale": "br",
-              "colorTheme": "dark",
-              "isTransparent": true,
-              "showSymbolLogo": true,
-              "width": "100%",
-              "height": "auto",
-              "gridLineColor": "rgba(42,48,80,0.5)",
-              "symbolActiveColor": "rgba(28,34,53,1)",
-              "tabs": [
-                {
-                  "title": "Meus Ativos",
-                  "symbols": [
-                    { "s": "OANDA:XAUUSD",    "d": "XAU/USD" },
-                    { "s": "CAPITALCOM:US100", "d": "NASDAQ NAS100" },
-                    { "s": "CAPITALCOM:US30",  "d": "Dow Jones US30" }
-                  ]
-                }
-              ]
-            }
-            </script>
-          </div>
-        </div>
-      </div>
-
+    dynamic.innerHTML = `
       <div style="margin:12px 16px 0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <div class="block-title">

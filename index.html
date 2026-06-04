@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Panorama Trade — Seu briefing antes da abertura de Nova York">
   <meta name="theme-color" content="#0A0D14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,185 +15,262 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="app">
+<div id="app">
 
-    <section class="screen active" id="s-home"></section>
-    <section class="screen" id="s-calendar"></section>
-    <section class="screen" id="s-diary"></section>
-    <section class="screen" id="s-check"></section>
-    <section class="screen" id="s-charts"></section>
+  <!-- TELA 1 PANORAMA -->
+  <section class="screen active" id="s-home">
 
-    <nav class="bottom-nav" id="bottom-nav">
-      <button class="nav-btn active" data-target="s-home">
-        <i class="ti ti-layout-dashboard"></i>
-        <span>Panorama</span>
-      </button>
-      <button class="nav-btn" data-target="s-calendar">
-        <i class="ti ti-calendar-event"></i>
-        <span>Calendario</span>
-      </button>
-      <button class="nav-btn" data-target="s-diary">
-        <i class="ti ti-notebook"></i>
-        <span>Diario</span>
-      </button>
-      <button class="nav-btn" data-target="s-check">
-        <i class="ti ti-checklist"></i>
-        <span>Checklist</span>
-      </button>
-      <button class="nav-btn" data-target="s-charts">
-        <i class="ti ti-chart-candle"></i>
-        <span>Graficos</span>
-      </button>
-    </nav>
-
-    <div class="modal-overlay" id="modal-event" role="dialog" aria-modal="true">
-      <div class="modal">
-        <div class="modal-handle"></div>
-        <button class="modal-close" onclick="App.closeModal('modal-event')"><i class="ti ti-x"></i></button>
-        <h2 class="modal-title">Novo Evento Economico</h2>
-        <div class="form-group">
-          <label class="form-label" for="ev-name">Nome do Evento</label>
-          <input class="form-input" id="ev-name" type="text" placeholder="Ex: NFP, ISM, FOMC..." maxlength="100" autocomplete="off">
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="ev-curr">Moeda</label>
-            <select class="form-select" id="ev-curr">
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
-              <option value="JPY">JPY</option>
-              <option value="CAD">CAD</option>
-              <option value="AUD">AUD</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ev-impact">Impacto</label>
-            <select class="form-select" id="ev-impact">
-              <option value="high">Alto</option>
-              <option value="med">Medio</option>
-              <option value="low">Baixo</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="ev-time">Horario (JST)</label>
-            <input class="form-input" id="ev-time" type="time">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ev-date">Data</label>
-            <input class="form-input" id="ev-date" type="date">
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="ev-prev">Anterior</label>
-            <input class="form-input" id="ev-prev" type="text" placeholder="--" maxlength="20" autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ev-fore">Previsao</label>
-            <input class="form-input" id="ev-fore" type="text" placeholder="--" maxlength="20" autocomplete="off">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="ev-desc">Impacto esperado</label>
-          <input class="form-input" id="ev-desc" type="text" placeholder="Ex: USD forte = XAU/USD desce" maxlength="200" autocomplete="off">
-        </div>
-        <button class="btn-primary" onclick="CalendarPage.saveEvent()">Salvar Evento</button>
+    <div class="header">
+      <div>
+        <div class="header-logo">Panorama <span>Trade</span></div>
+        <div class="header-sub">Briefing antes de Nova York</div>
+      </div>
+      <div class="header-time">
+        <div class="time" id="clock">--:--:--</div>
+        <div class="label">Japao (JST)</div>
       </div>
     </div>
 
-    <div class="modal-overlay" id="modal-trade" role="dialog" aria-modal="true">
-      <div class="modal">
-        <div class="modal-handle"></div>
-        <button class="modal-close" onclick="App.closeModal('modal-trade')"><i class="ti ti-x"></i></button>
-        <h2 class="modal-title" id="trade-modal-title">Nova Operacao</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="tr-type">Tipo</label>
-            <select class="form-select" id="tr-type">
-              <option value="buy">Compra</option>
-              <option value="sell">Venda</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="tr-time">Horario (JST)</label>
-            <input class="form-input" id="tr-time" type="time">
-          </div>
+    <!-- COTACOES WIDGET ESTATICO -->
+    <div style="margin:12px 16px 0">
+      <div style="display:flex;align-items:center;margin-bottom:8px">
+        <div class="block-title">
+          <i class="ti ti-activity" style="font-size:13px"></i>
+          Cotacoes em Tempo Real
         </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="tr-entry">Entrada</label>
-            <input class="form-input" id="tr-entry" type="number" placeholder="0.00" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="tr-lot">Lote</label>
-            <input class="form-input" id="tr-lot" type="number" placeholder="0.01" step="0.01" min="0">
-          </div>
+        <div class="live-badge">
+          <div class="live-dot"></div>
+          Live · TradingView
         </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="tr-sl">Stop Loss</label>
-            <input class="form-input" id="tr-sl" type="number" placeholder="0.00" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="tr-tp">Take Profit</label>
-            <input class="form-input" id="tr-tp" type="number" placeholder="0.00" step="0.01" min="0">
-          </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+          {
+            "title": "",
+            "locale": "br",
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "showSymbolLogo": true,
+            "width": "100%",
+            "height": "auto",
+            "gridLineColor": "rgba(42,48,80,0.5)",
+            "symbolActiveColor": "rgba(28,34,53,1)",
+            "tabs": [
+              {
+                "title": "Meus Ativos",
+                "symbols": [
+                  { "s": "OANDA:XAUUSD",    "d": "XAU/USD" },
+                  { "s": "CAPITALCOM:US100", "d": "NASDAQ NAS100" },
+                  { "s": "CAPITALCOM:US30",  "d": "Dow Jones US30" }
+                ]
+              }
+            ]
+          }
+          </script>
         </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="tr-result">Resultado ($)</label>
-            <input class="form-input" id="tr-result" type="number" placeholder="0.00" step="0.01">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="tr-pips">Pts / Pips</label>
-            <input class="form-input" id="tr-pips" type="number" placeholder="0" step="1">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="tr-strat">Estrategia</label>
-          <select class="form-select" id="tr-strat">
-            <option value="Breakout">Breakout</option>
-            <option value="Reversao">Reversao</option>
-            <option value="Tendencia">Tendencia</option>
-            <option value="Noticia">Noticia</option>
-            <option value="Suporte/Resistencia">Suporte / Resistencia</option>
-            <option value="Outra">Outra</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="tr-emo">Estado emocional</label>
-          <select class="form-select" id="tr-emo">
-            <option value="Calmo">Calmo</option>
-            <option value="Focado">Focado</option>
-            <option value="Ansioso">Ansioso</option>
-            <option value="Com medo">Com medo</option>
-            <option value="Ganancioso">Ganancioso</option>
-            <option value="Frustrado">Frustrado</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="tr-note">Analise / Observacoes</label>
-          <textarea class="form-textarea" id="tr-note" placeholder="Descreva sua analise antes da entrada..." maxlength="1000"></textarea>
-        </div>
-        <button class="btn-primary" onclick="DiaryPage.saveTrade()">Salvar Operacao</button>
       </div>
     </div>
 
+    <!-- COUNTDOWN COMPACTO -->
+    <div style="margin:10px 16px 0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <i class="ti ti-clock" style="color:var(--gold2);font-size:16px"></i>
+        <div>
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px">Abertura Nova York</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gold2)" id="open-time">--:--</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:1px">Faltam</div>
+        <div style="font-size:14px;font-weight:600;font-family:'DM Mono',monospace;color:var(--orange)" id="countdown">--h --m --s</div>
+      </div>
+    </div>
+
+    <!-- EVENTOS + RESTO RENDERIZADO PELO JS -->
+    <div id="home-dynamic"></div>
+
+  </section>
+
+  <section class="screen" id="s-calendar"></section>
+  <section class="screen" id="s-diary"></section>
+  <section class="screen" id="s-check"></section>
+  <section class="screen" id="s-charts"></section>
+
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-btn active" data-target="s-home">
+      <i class="ti ti-layout-dashboard"></i>
+      <span>Panorama</span>
+    </button>
+    <button class="nav-btn" data-target="s-calendar">
+      <i class="ti ti-calendar-event"></i>
+      <span>Calendario</span>
+    </button>
+    <button class="nav-btn" data-target="s-diary">
+      <i class="ti ti-notebook"></i>
+      <span>Diario</span>
+    </button>
+    <button class="nav-btn" data-target="s-check">
+      <i class="ti ti-checklist"></i>
+      <span>Checklist</span>
+    </button>
+    <button class="nav-btn" data-target="s-charts">
+      <i class="ti ti-chart-candle"></i>
+      <span>Graficos</span>
+    </button>
+  </nav>
+
+  <!-- MODAL EVENTO -->
+  <div class="modal-overlay" id="modal-event" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <button class="modal-close" onclick="App.closeModal('modal-event')"><i class="ti ti-x"></i></button>
+      <h2 class="modal-title">Novo Evento Economico</h2>
+      <div class="form-group">
+        <label class="form-label" for="ev-name">Nome do Evento</label>
+        <input class="form-input" id="ev-name" type="text" placeholder="Ex: NFP, ISM, FOMC..." maxlength="100" autocomplete="off">
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="ev-curr">Moeda</label>
+          <select class="form-select" id="ev-curr">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="CAD">CAD</option>
+            <option value="AUD">AUD</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ev-impact">Impacto</label>
+          <select class="form-select" id="ev-impact">
+            <option value="high">Alto</option>
+            <option value="med">Medio</option>
+            <option value="low">Baixo</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="ev-time">Horario (JST)</label>
+          <input class="form-input" id="ev-time" type="time">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ev-date">Data</label>
+          <input class="form-input" id="ev-date" type="date">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="ev-prev">Anterior</label>
+          <input class="form-input" id="ev-prev" type="text" placeholder="--" maxlength="20" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ev-fore">Previsao</label>
+          <input class="form-input" id="ev-fore" type="text" placeholder="--" maxlength="20" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="ev-desc">Impacto esperado</label>
+        <input class="form-input" id="ev-desc" type="text" placeholder="Ex: USD forte = XAU/USD desce" maxlength="200" autocomplete="off">
+      </div>
+      <button class="btn-primary" onclick="CalendarPage.saveEvent()">Salvar Evento</button>
+    </div>
   </div>
 
-  <script src="js/storage.js"></script>
-  <script src="js/clock.js"></script>
-  <script src="js/events.js"></script>
-  <script src="js/diary.js"></script>
-  <script src="js/checklist.js"></script>
-  <script src="js/pages/home.js"></script>
-  <script src="js/pages/calendar.js"></script>
-  <script src="js/pages/diary.js"></script>
-  <script src="js/pages/checklist.js"></script>
-  <script src="js/pages/charts.js"></script>
-  <script src="js/app.js"></script>
+  <!-- MODAL OPERACAO -->
+  <div class="modal-overlay" id="modal-trade" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <button class="modal-close" onclick="App.closeModal('modal-trade')"><i class="ti ti-x"></i></button>
+      <h2 class="modal-title" id="trade-modal-title">Nova Operacao</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="tr-type">Tipo</label>
+          <select class="form-select" id="tr-type">
+            <option value="buy">Compra</option>
+            <option value="sell">Venda</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="tr-time">Horario (JST)</label>
+          <input class="form-input" id="tr-time" type="time">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="tr-entry">Entrada</label>
+          <input class="form-input" id="tr-entry" type="number" placeholder="0.00" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="tr-lot">Lote</label>
+          <input class="form-input" id="tr-lot" type="number" placeholder="0.01" step="0.01" min="0">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="tr-sl">Stop Loss</label>
+          <input class="form-input" id="tr-sl" type="number" placeholder="0.00" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="tr-tp">Take Profit</label>
+          <input class="form-input" id="tr-tp" type="number" placeholder="0.00" step="0.01" min="0">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="tr-result">Resultado ($)</label>
+          <input class="form-input" id="tr-result" type="number" placeholder="0.00" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="tr-pips">Pts / Pips</label>
+          <input class="form-input" id="tr-pips" type="number" placeholder="0" step="1">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-strat">Estrategia</label>
+        <select class="form-select" id="tr-strat">
+          <option value="Breakout">Breakout</option>
+          <option value="Reversao">Reversao</option>
+          <option value="Tendencia">Tendencia</option>
+          <option value="Noticia">Noticia</option>
+          <option value="Suporte/Resistencia">Suporte / Resistencia</option>
+          <option value="Outra">Outra</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-emo">Estado emocional</label>
+        <select class="form-select" id="tr-emo">
+          <option value="Calmo">Calmo</option>
+          <option value="Focado">Focado</option>
+          <option value="Ansioso">Ansioso</option>
+          <option value="Com medo">Com medo</option>
+          <option value="Ganancioso">Ganancioso</option>
+          <option value="Frustrado">Frustrado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="tr-note">Analise / Observacoes</label>
+        <textarea class="form-textarea" id="tr-note" placeholder="Descreva sua analise antes da entrada..." maxlength="1000"></textarea>
+      </div>
+      <button class="btn-primary" onclick="DiaryPage.saveTrade()">Salvar Operacao</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/events.js"></script>
+<script src="js/diary.js"></script>
+<script src="js/checklist.js"></script>
+<script src="js/pages/home.js"></script>
+<script src="js/pages/calendar.js"></script>
+<script src="js/pages/diary.js"></script>
+<script src="js/pages/checklist.js"></script>
+<script src="js/pages/charts.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
