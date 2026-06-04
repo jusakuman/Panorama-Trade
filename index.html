@@ -3,61 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Panorama Trade â€” Seu briefing antes da abertura de Nova York">
+  <meta name="description" content="Panorama Trade — Seu briefing antes da abertura de Nova York">
   <meta name="theme-color" content="#0A0D14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Panorama Trade">
   <title>Panorama Trade</title>
-
-  <!-- Fontes -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/logo/icon.png">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Ãcones -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-
-  <!-- CSS principal -->
-  <link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/logo/icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Panorama Trade"><link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
   <div id="app">
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         TELA 1 â€” PANORAMA
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <section class="screen active" id="s-home">
-      <!-- ConteÃºdo renderizado por js/pages/home.js -->
-    </section>
+    <section class="screen active" id="s-home"></section>
+    <section class="screen" id="s-calendar"></section>
+    <section class="screen" id="s-diary"></section>
+    <section class="screen" id="s-check"></section>
+    <section class="screen" id="s-charts"></section>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         TELA 2 â€” CALENDÃRIO
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <section class="screen" id="s-calendar">
-      <!-- ConteÃºdo renderizado por js/pages/calendar.js -->
-    </section>
-
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         TELA 3 â€” DIÃRIO
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <section class="screen" id="s-diary">
-      <!-- ConteÃºdo renderizado por js/pages/diary.js -->
-    </section>
-
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         TELA 4 â€” CHECKLIST
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <section class="screen" id="s-check">
-      <!-- ConteÃºdo renderizado por js/pages/checklist.js -->
-    </section>
-
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         TELA 5 â€” GRÃFICOS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <section class="screen" id="s-charts">
-      <!-- ConteÃºdo renderizado por js/pages/charts.js -->
-    </section>
-
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         NAVEGAÃ‡ÃƒO INFERIOR
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <nav class="bottom-nav" id="bottom-nav">
       <button class="nav-btn active" data-target="s-home">
         <i class="ti ti-layout-dashboard"></i>
@@ -65,11 +31,11 @@
       </button>
       <button class="nav-btn" data-target="s-calendar">
         <i class="ti ti-calendar-event"></i>
-        <span>CalendÃ¡rio</span>
+        <span>Calendario</span>
       </button>
       <button class="nav-btn" data-target="s-diary">
         <i class="ti ti-notebook"></i>
-        <span>DiÃ¡rio</span>
+        <span>Diario</span>
       </button>
       <button class="nav-btn" data-target="s-check">
         <i class="ti ti-checklist"></i>
@@ -77,26 +43,19 @@
       </button>
       <button class="nav-btn" data-target="s-charts">
         <i class="ti ti-chart-candle"></i>
-        <span>GrÃ¡ficos</span>
+        <span>Graficos</span>
       </button>
     </nav>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         MODAL â€” NOVO EVENTO ECONÃ”MICO
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <div class="modal-overlay" id="modal-event" role="dialog" aria-modal="true" aria-label="Novo Evento EconÃ´mico">
+    <div class="modal-overlay" id="modal-event" role="dialog" aria-modal="true">
       <div class="modal">
         <div class="modal-handle"></div>
-        <button class="modal-close" onclick="App.closeModal('modal-event')" aria-label="Fechar">
-          <i class="ti ti-x"></i>
-        </button>
-        <h2 class="modal-title">Novo Evento EconÃ´mico</h2>
-
+        <button class="modal-close" onclick="App.closeModal('modal-event')"><i class="ti ti-x"></i></button>
+        <h2 class="modal-title">Novo Evento Economico</h2>
         <div class="form-group">
           <label class="form-label" for="ev-name">Nome do Evento</label>
           <input class="form-input" id="ev-name" type="text" placeholder="Ex: NFP, ISM, FOMC..." maxlength="100" autocomplete="off">
         </div>
-
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="ev-curr">Moeda</label>
@@ -112,16 +71,15 @@
           <div class="form-group">
             <label class="form-label" for="ev-impact">Impacto</label>
             <select class="form-select" id="ev-impact">
-              <option value="high">ðŸ”´ Alto</option>
-              <option value="med">ðŸŸ¡ MÃ©dio</option>
-              <option value="low">âšª Baixo</option>
+              <option value="high">Alto</option>
+              <option value="med">Medio</option>
+              <option value="low">Baixo</option>
             </select>
           </div>
         </div>
-
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label" for="ev-time">HorÃ¡rio (JST)</label>
+            <label class="form-label" for="ev-time">Horario (JST)</label>
             <input class="form-input" id="ev-time" type="time">
           </div>
           <div class="form-group">
@@ -129,52 +87,42 @@
             <input class="form-input" id="ev-date" type="date">
           </div>
         </div>
-
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="ev-prev">Anterior</label>
-            <input class="form-input" id="ev-prev" type="text" placeholder="â€”" maxlength="20" autocomplete="off">
+            <input class="form-input" id="ev-prev" type="text" placeholder="--" maxlength="20" autocomplete="off">
           </div>
           <div class="form-group">
-            <label class="form-label" for="ev-fore">PrevisÃ£o</label>
-            <input class="form-input" id="ev-fore" type="text" placeholder="â€”" maxlength="20" autocomplete="off">
+            <label class="form-label" for="ev-fore">Previsao</label>
+            <input class="form-input" id="ev-fore" type="text" placeholder="--" maxlength="20" autocomplete="off">
           </div>
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="ev-desc">Impacto esperado nos ativos</label>
-          <input class="form-input" id="ev-desc" type="text" placeholder="Ex: USD forte â†’ XAU/USD desce" maxlength="200" autocomplete="off">
+          <label class="form-label" for="ev-desc">Impacto esperado</label>
+          <input class="form-input" id="ev-desc" type="text" placeholder="Ex: USD forte = XAU/USD desce" maxlength="200" autocomplete="off">
         </div>
-
         <button class="btn-primary" onclick="CalendarPage.saveEvent()">Salvar Evento</button>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         MODAL â€” NOVA OPERAÃ‡ÃƒO
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <div class="modal-overlay" id="modal-trade" role="dialog" aria-modal="true" aria-label="Nova OperaÃ§Ã£o">
+    <div class="modal-overlay" id="modal-trade" role="dialog" aria-modal="true">
       <div class="modal">
         <div class="modal-handle"></div>
-        <button class="modal-close" onclick="App.closeModal('modal-trade')" aria-label="Fechar">
-          <i class="ti ti-x"></i>
-        </button>
-        <h2 class="modal-title" id="trade-modal-title">Nova OperaÃ§Ã£o</h2>
-
+        <button class="modal-close" onclick="App.closeModal('modal-trade')"><i class="ti ti-x"></i></button>
+        <h2 class="modal-title" id="trade-modal-title">Nova Operacao</h2>
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="tr-type">Tipo</label>
             <select class="form-select" id="tr-type">
-              <option value="buy">ðŸŸ¢ Compra</option>
-              <option value="sell">ðŸ”´ Venda</option>
+              <option value="buy">Compra</option>
+              <option value="sell">Venda</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label" for="tr-time">HorÃ¡rio (JST)</label>
+            <label class="form-label" for="tr-time">Horario (JST)</label>
             <input class="form-input" id="tr-time" type="time">
           </div>
         </div>
-
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="tr-entry">Entrada</label>
@@ -185,7 +133,6 @@
             <input class="form-input" id="tr-lot" type="number" placeholder="0.01" step="0.01" min="0">
           </div>
         </div>
-
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="tr-sl">Stop Loss</label>
@@ -196,7 +143,6 @@
             <input class="form-input" id="tr-tp" type="number" placeholder="0.00" step="0.01" min="0">
           </div>
         </div>
-
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="tr-result">Resultado ($)</label>
@@ -207,45 +153,38 @@
             <input class="form-input" id="tr-pips" type="number" placeholder="0" step="1">
           </div>
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="tr-strat">EstratÃ©gia</label>
+          <label class="form-label" for="tr-strat">Estrategia</label>
           <select class="form-select" id="tr-strat">
             <option value="Breakout">Breakout</option>
-            <option value="ReversÃ£o">ReversÃ£o</option>
-            <option value="TendÃªncia">TendÃªncia</option>
-            <option value="NotÃ­cia">NotÃ­cia</option>
-            <option value="Suporte/ResistÃªncia">Suporte / ResistÃªncia</option>
+            <option value="Reversao">Reversao</option>
+            <option value="Tendencia">Tendencia</option>
+            <option value="Noticia">Noticia</option>
+            <option value="Suporte/Resistencia">Suporte / Resistencia</option>
             <option value="Outra">Outra</option>
           </select>
         </div>
-
         <div class="form-group">
           <label class="form-label" for="tr-emo">Estado emocional</label>
           <select class="form-select" id="tr-emo">
-            <option value="Calmo">ðŸ˜Œ Calmo</option>
-            <option value="Focado">ðŸŽ¯ Focado</option>
-            <option value="Ansioso">ðŸ˜¤ Ansioso</option>
-            <option value="Com medo">ðŸ˜¨ Com medo</option>
-            <option value="Ganancioso">ðŸ¤‘ Ganancioso</option>
-            <option value="Frustrado">ðŸ˜  Frustrado</option>
+            <option value="Calmo">Calmo</option>
+            <option value="Focado">Focado</option>
+            <option value="Ansioso">Ansioso</option>
+            <option value="Com medo">Com medo</option>
+            <option value="Ganancioso">Ganancioso</option>
+            <option value="Frustrado">Frustrado</option>
           </select>
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="tr-note">AnÃ¡lise / ObservaÃ§Ãµes</label>
-          <textarea class="form-textarea" id="tr-note" placeholder="Descreva sua anÃ¡lise antes da entrada..." maxlength="1000"></textarea>
+          <label class="form-label" for="tr-note">Analise / Observacoes</label>
+          <textarea class="form-textarea" id="tr-note" placeholder="Descreva sua analise antes da entrada..." maxlength="1000"></textarea>
         </div>
-
-        <button class="btn-primary" onclick="DiaryPage.saveTrade()">Salvar OperaÃ§Ã£o</button>
+        <button class="btn-primary" onclick="DiaryPage.saveTrade()">Salvar Operacao</button>
       </div>
     </div>
 
-  </div><!-- /#app -->
+  </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       SCRIPTS â€” ordem importa!
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <script src="js/storage.js"></script>
   <script src="js/clock.js"></script>
   <script src="js/events.js"></script>
@@ -257,6 +196,5 @@
   <script src="js/pages/checklist.js"></script>
   <script src="js/pages/charts.js"></script>
   <script src="js/app.js"></script>
-
 </body>
 </html>
