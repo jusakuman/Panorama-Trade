@@ -5,16 +5,30 @@
   try {
     const [xauRes, nasRes, us30Res] = await Promise.all([
       fetch('https://api.gold-api.com/price/XAU'),
-      fetch('https://stooq.com/q/l/?s=^ndx&f=sd2t2ohlcv&h&e=json'),
-      fetch('https://stooq.com/q/l/?s=^dji&f=sd2t2ohlcv&h&e=json')
+      fetch('https://stooq.com/q/l/?s=^ndx&f=sd2t2ohlcv&h&e=csv'),
+      fetch('https://stooq.com/q/l/?s=^dji&f=sd2t2ohlcv&h&e=csv')
     ]);
 
     const xauData = await xauRes.json();
-    const nasData = await nasRes.json();
-    const us30Data = await us30Res.json();
+    const nasCsv = await nasRes.text();
+    const us30Csv = await us30Res.text();
 
-    const nasQ = nasData.symbols[0];
-    const us30Q = us30Data.symbols[0];
+    function parseCsv(csv) {
+      const lines = csv.trim().split('\n');
+      const headers = lines[0].split(',');
+      const values = lines[1].split(',');
+      const obj = {};
+      headers.forEach((h, i) => { obj[h.trim()] = values[i] ? values[i].trim() : null; });
+      return obj;
+    }
+
+    const nas = parseCsv(nasCsv);
+    const us30 = parseCsv(us30Csv);
+
+    const nasClose = parseFloat(nas.Close);
+    const nasOpen = parseFloat(nas.Open);
+    const us30Close = parseFloat(us30.Close);
+    const us30Open = parseFloat(us30.Open);
 
     const results = [
       {
@@ -22,27 +36,24 @@
         name: 'XAU/USD',
         sub: 'Ouro',
         price: xauData.price,
-        prev: xauData.prev_close_price,
-        change: xauData.price - xauData.prev_close_price,
-        pct: ((xauData.price - xauData.prev_close_price) / xauData.prev_close_price) * 100
+        change: xauData.ch,
+        pct: xauData.chp
       },
       {
         id: 'nas',
         name: 'NAS100',
         sub: 'NASDAQ 100',
-        price: parseFloat(nasQ.Close),
-        prev: parseFloat(nasQ.Open),
-        change: parseFloat(nasQ.Close) - parseFloat(nasQ.Open),
-        pct: ((parseFloat(nasQ.Close) - parseFloat(nasQ.Open)) / parseFloat(nasQ.Open)) * 100
+        price: nasClose,
+        change: nasClose - nasOpen,
+        pct: ((nasClose - nasOpen) / nasOpen) * 100
       },
       {
         id: 'us30',
         name: 'US30',
         sub: 'Dow Jones',
-        price: parseFloat(us30Q.Close),
-        prev: parseFloat(us30Q.Open),
-        change: parseFloat(us30Q.Close) - parseFloat(us30Q.Open),
-        pct: ((parseFloat(us30Q.Close) - parseFloat(us30Q.Open)) / parseFloat(us30Q.Open)) * 100
+        price: us30Close,
+        change: us30Close - us30Open,
+        pct: ((us30Close - us30Open) / us30Open) * 100
       }
     ];
 
