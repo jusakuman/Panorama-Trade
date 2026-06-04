@@ -7,7 +7,10 @@
     dynamic.innerHTML = `
       <div style="margin:12px 16px 0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div class="block-title"><i class="ti ti-calendar-event" style="font-size:12px"></i> Eventos de Hoje</div>
+          <div class="block-title">
+            <i class="ti ti-calendar-event" style="font-size:12px"></i>
+            Eventos de Hoje
+          </div>
           <div style="font-size:10px;color:var(--text3)" id="ev-date-label"></div>
         </div>
         <div id="home-events"></div>
@@ -20,7 +23,9 @@
 
       <div class="sec-label">Resumo do Dia</div>
       <div class="summary-card">
-        <div class="summary-text" id="home-summary">Acompanhe os eventos acima antes de operar. Evite entrar em posicao nos 15 minutos antes e apos cada evento de alto impacto.</div>
+        <div class="summary-text" id="home-summary">
+          Acompanhe os eventos acima antes de operar. Evite entrar em posicao nos 15 minutos antes e apos cada evento de alto impacto.
+        </div>
         <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap" id="home-tags"></div>
       </div>
 
@@ -28,20 +33,30 @@
       <div style="padding:0 16px;margin-bottom:14px">
         <div class="asset-alert-card">
           <div class="asset-icon gold-i">Au</div>
-          <div class="ac-body"><div class="ac-name">XAU/USD - Ouro</div><div class="ac-alert">Acompanhe o DXY. Alta do dolar pressiona ouro para baixo.</div></div>
+          <div class="ac-body">
+            <div class="ac-name">XAU/USD - Ouro</div>
+            <div class="ac-alert">Acompanhe o DXY. Alta do dolar pressiona ouro para baixo.</div>
+          </div>
           <div class="badge bm">Medio</div>
         </div>
         <div class="asset-alert-card">
           <div class="asset-icon nas-i">NQ</div>
-          <div class="ac-body"><div class="ac-name">NASDAQ - NAS100</div><div class="ac-alert">Tecnologia em foco. Volatilidade esperada na abertura.</div></div>
+          <div class="ac-body">
+            <div class="ac-name">NASDAQ - NAS100</div>
+            <div class="ac-alert">Tecnologia em foco. Volatilidade esperada na abertura.</div>
+          </div>
           <div class="badge bm">Medio</div>
         </div>
         <div class="asset-alert-card">
           <div class="asset-icon dow-i">DJ</div>
-          <div class="ac-body"><div class="ac-name">Dow Jones - US30</div><div class="ac-alert">Blue chips estaveis. Sem catalisadores especificos.</div></div>
+          <div class="ac-body">
+            <div class="ac-name">Dow Jones - US30</div>
+            <div class="ac-alert">Blue chips estaveis. Sem catalisadores especificos.</div>
+          </div>
           <div class="badge bl">Baixo</div>
         </div>
       </div>
+
       <div class="spacer"></div>
     `;
 
@@ -59,14 +74,15 @@
 
     if (dateEl) {
       dateEl.textContent = new Intl.DateTimeFormat('pt-BR', {
-        timeZone: 'Asia/Tokyo', weekday: 'long', day: 'numeric', month: 'long'
+        timeZone: 'Asia/Tokyo',
+        weekday: 'long', day: 'numeric', month: 'long'
       }).format(new Date());
     }
 
     if (!listEl) return;
 
     if (!evs.length) {
-      listEl.innerHTML = '<div class="empty">Nenhum evento para hoje.<br>Va em Calendario e adicione.</div>';
+      listEl.innerHTML = '<div class="empty">Nenhum evento cadastrado para hoje.<br>Va em Calendario e adicione.</div>';
       if (banEl) banEl.style.display = 'none';
       return;
     }
@@ -87,11 +103,13 @@
         ? '<span style="background:rgba(232,69,69,.1);color:var(--red);font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500">' + highCount + ' evento' + (highCount > 1 ? 's' : '') + ' de alto impacto</span>'
         : '';
     }
+
     if (summaryEl && highCount > 0) {
       const names = evs.filter(e => e.impact === 'high').map(e => e.name).join(', ');
-      summaryEl.textContent = 'Atencao: ' + names + '. Eventos de alto impacto geram volatilidade intensa. Evite entrar nos 15 min antes e apos.';
+      summaryEl.textContent = 'Atencao: ' + names + '. Eventos de alto impacto geram volatilidade intensa. Evite entrar nos 15 min antes e apos. Reduza o lote se necessario.';
     }
   }
 
   return { render };
+
 })();
